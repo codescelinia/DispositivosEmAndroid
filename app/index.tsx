@@ -1,20 +1,51 @@
-//index.jsx
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, Pressable } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome'; 
+//Index.tsx
+import React, { useState } from 'react';
+import { View, Image, ScrollView, StyleSheet, Text, Pressable } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-//import * as Font from 'expo-font';
-//export default function Index() {
 
-export default function Index({ navigation }) {
+import PortfolioScreen from '../../screens/PortfolioScreen';
+import ActionButton from '../components/ActionButton';
+
+const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const [count, setCount] = useState(0);
+
+  const handleNavigateToPortfolio = () => {
+    navigation.navigate('Portfolio');
+  };
+
+  const handleNavigateToTatuagens = () => {
+    navigation.navigate('Tatuagem');
+  };
+
+  const handleNavigateToPiercings = () => {
+    navigation.navigate('Piercing');
+  };
+
+  const handlePress = () => {
+    setCount(count + 1);
+    console.log(`Botão clicado ${count + 1} vezes`);
+  };
+
   return (
-
     <View style={styles.container}>
-      <Image source={require('../assets/images/vilyperfil.jpg')} style={styles.logo} />
-
+       <Image source={require('../assets/images/vilyperfil.jpg')} style={styles.logo} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.actions} />
+        <View style={styles.actionsContainer}>
+          <ActionButton
+            onPress={handleNavigateToPortfolio}
+            title="Ver Portfólio"
+          />
+          <ActionButton
+            onPress={handleNavigateToTatuagens}
+            title="Ver Tatuagens"
+          />
+          <ActionButton
+            onPress={handleNavigateToPiercings}
+            title="Ver Piercings"
+          />
+        </View>
+
         <Text style={styles.title}>Vily Xavier</Text>
         <Text style={styles.subtitle}>STUDIO DE TATUAGEM E PIERCING</Text>
 
@@ -28,7 +59,6 @@ export default function Index({ navigation }) {
               <Text style={styles.specialtyItem}>• Tatuagens Coloridas</Text>
               <Text style={styles.specialtyItem}>• Tatuagens Rasteladas</Text>
               <Text style={styles.specialtyItem}>• Finelines</Text>
-              
             </View>
 
             <View style={styles.specialtyColumn}>
@@ -37,35 +67,45 @@ export default function Index({ navigation }) {
               <Text style={styles.specialtyItem}>• Perfurações Íntimas</Text>
               <Text style={styles.specialtyItem}>• Microdermal</Text>
               <Text style={styles.specialtyItem}>• Surface</Text>
-               <Text style={styles.specialtyItem}>• Projetos Auriculares</Text>
+              <Text style={styles.specialtyItem}>• Projetos Auriculares</Text>
             </View>
           </View>
         </View>
-<Pressable 
-          style={styles.portfolioButton} 
+
+        <Pressable
+          style={styles.portfolioButton}
           onPress={() => {
             console.log('Navegando para o portfólio');
-            navigation.navigate('Portfolio'); // Navegação para a tela de portfólio
+            navigation.navigate('Portfolio');
           }}
         >
           <Text style={styles.portfolioButtonText}>Ver Portfólio</Text>
         </Pressable>
       </ScrollView>
+
+      <ActionButton
+        onPress={() => handlePress()}
+        title="Clique aqui"
+      />
     </View>
   );
-}
+};
+
 const Stack = createStackNavigator();
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="Index" component={Index} />
         <Stack.Screen name="Portfolio" component={PortfolioScreen} />
-        <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -136,17 +176,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black',
     marginBottom: 5,
-    textAlign: 'center', // Centraliza o texto dos itens
+    textAlign: 'center', 
   },
   portfolioButton: {
-    width: '80%', // Ajuste a largura do botão para 80% da tela
+    width: '80%', 
     marginTop: 20,
     paddingVertical: 15,
     paddingHorizontal: 20,
     backgroundColor: '#5E06A2',
     borderRadius: 30,
-    alignItems: 'center', // Centraliza o texto dentro do botão
-    borderRadius: 30,
+    alignItems: 'center', 
+    //borderRadius: 30,
   },
   portfolioButtonText: {
     color: '#fff',
@@ -156,4 +196,10 @@ const styles = StyleSheet.create({
     padding: 5,
     
   },
-});
+
+ actionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+ }, 
+})
