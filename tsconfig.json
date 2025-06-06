@@ -6,7 +6,7 @@
     "paths": {
       "@/*": ["./*"],
       "@screens/*": ["./src/screens/*"],
-      "@components/*": ["./components/*"],
+      "@components/*": [".expo/app/components/*"],
       "@src/*": ["./src/*"]
     }
   },
@@ -16,7 +16,7 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     ".expo/app/index.jsx"
-, "components/ActionButton.js"  ],
+, ".expo/app/components/ActionButton.js"  ],
   "exclude": [
     "node_modules",
     "babel.config.js",

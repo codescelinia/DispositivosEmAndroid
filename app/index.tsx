@@ -1,11 +1,15 @@
 //Index.tsx
-import React, { useState } from 'react';
-import { View, Image, ScrollView, StyleSheet, Text, Pressable } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import React, { useState } from 'react';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import ActionButton from '../.expo/app/components/ActionButton';
+import PortfolioScreen from '../.expo/app/src/screens/PortfolioScreen';
 
-import PortfolioScreen from '../../screens/PortfolioScreen';
-import ActionButton from '../components/ActionButton';
+
+
+<ActionButton active={true} onPress={() => doSomething()} display="Click me" />
+
 
 const Index: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [count, setCount] = useState(0);
